@@ -61,8 +61,6 @@ fun ComposerApp() {
       ),
       verticalArrangement = Arrangement.Center,
       state = listState) {
-      // TODO: Remove item; for beginning only
-      item { StartOnlyTextComposables() }
 
       item { ButtonExample(contentModifier, iconModifier) }
       item { TextExample(contentModifier) }

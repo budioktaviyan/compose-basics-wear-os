@@ -1,10 +1,15 @@
 package id.android.basics.compose
 
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Message
+import androidx.compose.material.icons.rounded.Phone
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -12,6 +17,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.wear.compose.material.AppCard
+import androidx.wear.compose.material.Button
+import androidx.wear.compose.material.ButtonDefaults
+import androidx.wear.compose.material.Icon
 import androidx.wear.compose.material.MaterialTheme
 import androidx.wear.compose.material.Text
 import id.android.basics.compose.theme.ComposerTheme
@@ -34,19 +43,50 @@ fun StartOnlyTextComposables() {
 fun ButtonExample(
   modifier: Modifier = Modifier,
   iconModifier: Modifier = Modifier) {
-  // TODO: Create a Button Composable (with a Row to center)
+  Row(
+    modifier = modifier,
+    horizontalArrangement = Arrangement.Center) {
+    Button(
+      modifier = Modifier.size(ButtonDefaults.LargeButtonSize),
+      onClick = { /* no content */ }) {
+      Icon(
+        imageVector = Icons.Rounded.Phone,
+        contentDescription = "Triggers phone action",
+        modifier = iconModifier
+      )
+    }
+  }
 }
 
 @Composable
 fun TextExample(modifier: Modifier = Modifier) {
-  // TODO: Create a Text Composable
+  Text(
+    modifier = modifier,
+    textAlign = TextAlign.Center,
+    color = MaterialTheme.colors.primary,
+    text = stringResource(id = R.string.device_shape)
+  )
 }
 
 @Composable
 fun CardExample(
   modifier: Modifier = Modifier,
   iconModifier: Modifier = Modifier) {
-  // TODO: Create a Card (specifically, an AppCard) Composable
+  AppCard(
+    modifier = modifier,
+    appImage = {
+      Icon(
+        imageVector = Icons.Rounded.Message,
+        contentDescription = "Triggers open message action",
+        modifier = iconModifier
+      )
+    },
+    appName = { Text(text = "Messages") },
+    time = { Text(text = "12m") },
+    title = { Text(text = "Kim Green") },
+    onClick = { /* no content */ }) {
+    Text(text = "On my way!")
+  }
 }
 
 @Composable
