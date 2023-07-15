@@ -3,22 +3,21 @@ package id.android.basics.compose
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.wear.compose.material.AutoCenteringParams
 import androidx.wear.compose.material.Scaffold
 import androidx.wear.compose.material.ScalingLazyColumn
+import androidx.wear.compose.material.rememberScalingLazyListState
 import id.android.basics.compose.theme.ComposerTheme
 
 /**
@@ -40,8 +39,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun ComposerApp() {
   ComposerTheme {
-    // TODO: Swap to ScalingLazyListState
-    val listState = rememberLazyListState()
+    val listState = rememberScalingLazyListState()
 
     // TODO (Start): Create a Scaffold (Wear Version)
     /**
@@ -50,18 +48,10 @@ fun ComposerApp() {
     val contentModifier = Modifier.fillMaxWidth().padding(bottom = 8.dp)
     val iconModifier = Modifier.size(24.dp).wrapContentSize(align = Alignment.Center)
 
-    // TODO: Create a ScalingLazyColumn (Wear's version of LazyColumn)
-    LazyColumn(
+    ScalingLazyColumn(
       modifier = Modifier.fillMaxSize(),
-      contentPadding = PaddingValues(
-        top = 32.dp,
-        start = 8.dp,
-        end = 8.dp,
-        bottom = 32.dp
-      ),
-      verticalArrangement = Arrangement.Center,
+      autoCentering = AutoCenteringParams(itemIndex = 0),
       state = listState) {
-
       item { ButtonExample(contentModifier, iconModifier) }
       item { TextExample(contentModifier) }
       item { CardExample(contentModifier, iconModifier) }
