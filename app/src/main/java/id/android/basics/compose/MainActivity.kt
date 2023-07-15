@@ -15,9 +15,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.wear.compose.material.AutoCenteringParams
+import androidx.wear.compose.material.PositionIndicator
 import androidx.wear.compose.material.Scaffold
 import androidx.wear.compose.material.ScalingLazyColumn
+import androidx.wear.compose.material.TimeText
+import androidx.wear.compose.material.Vignette
+import androidx.wear.compose.material.VignettePosition
 import androidx.wear.compose.material.rememberScalingLazyListState
+import androidx.wear.compose.material.scrollAway
 import id.android.basics.compose.theme.ComposerTheme
 
 /**
@@ -41,26 +46,28 @@ fun ComposerApp() {
   ComposerTheme {
     val listState = rememberScalingLazyListState()
 
-    // TODO (Start): Create a Scaffold (Wear Version)
-    /**
-     * Modifiers used by our Wear composables
-     */
-    val contentModifier = Modifier.fillMaxWidth().padding(bottom = 8.dp)
-    val iconModifier = Modifier.size(24.dp).wrapContentSize(align = Alignment.Center)
+    Scaffold(
+      timeText = { TimeText(modifier = Modifier.scrollAway(listState)) },
+      vignette = { Vignette(vignettePosition = VignettePosition.TopAndBottom) },
+      positionIndicator = { PositionIndicator(scalingLazyListState = listState) }) {
+      /**
+       * Modifiers used by our Wear composables
+       */
+      val contentModifier = Modifier.fillMaxWidth().padding(bottom = 8.dp)
+      val iconModifier = Modifier.size(24.dp).wrapContentSize(align = Alignment.Center)
 
-    ScalingLazyColumn(
-      modifier = Modifier.fillMaxSize(),
-      autoCentering = AutoCenteringParams(itemIndex = 0),
-      state = listState) {
-      item { ButtonExample(contentModifier, iconModifier) }
-      item { TextExample(contentModifier) }
-      item { CardExample(contentModifier, iconModifier) }
+      ScalingLazyColumn(
+        modifier = Modifier.fillMaxSize(),
+        autoCentering = AutoCenteringParams(itemIndex = 0),
+        state = listState) {
+        item { ButtonExample(contentModifier, iconModifier) }
+        item { TextExample(contentModifier) }
+        item { CardExample(contentModifier, iconModifier) }
 
-      item { ChipExample(contentModifier, iconModifier) }
-      item { ToggleChipExample(contentModifier) }
+        item { ChipExample(contentModifier, iconModifier) }
+        item { ToggleChipExample(contentModifier) }
+      }
     }
-
-    // TODO (End): Create a Scaffold (Wear Version)
   }
 }
 
