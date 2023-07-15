@@ -1,0 +1,5 @@
+<resources>
+  <string name="app_name">Composer</string>
+  <string name="device_shape">Square Device</string>
+  <string name="hello_world_starter">Hello, Compose World!</string>
+</resources>
